@@ -1,0 +1,192 @@
+```markdown
+# MoveMates Waitlist API
+
+A backend API built with Node.js and Express for managing a waitlist system. This API allows users to sign up for a waitlist with details such as name, surname, email, user type (customer or driver), province, and city. The project uses PostgreSQL as its database, and Docker is used for easy setup of the database environment.
+
+## Features
+
+- Add users to the waitlist with:
+  - **Name**
+  - **Surname**
+  - **Email** (must be unique)
+  - **User Type** (either "customer" or "driver")
+  - **Province**
+  - **City**
+- Duplicate email detection to prevent multiple sign-ups with the same email.
+- Error handling and validation for smoother API use.
+
+## Technologies
+
+- Node.js
+- Express
+- PostgreSQL
+- dotenv (for environment configuration)
+- CORS
+- Docker (for easy PostgreSQL setup)
+
+## Getting Started
+
+### Prerequisites
+
+- **Node.js** and **npm** installed
+- **Docker** and **Docker Compose** installed
+- A `.env` file for environment variables (not shared in version control)
+
+### Installation
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/your-username/movemates-waitlist-api.git
+   cd movemates-waitlist-api
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Environment Configuration**:
+
+   1. **Create a `.env` file** in the root of the project with the following variables:
+
+      ```plaintext
+      DATABASE_URL=postgres://<DB_USER>:<DB_PASSWORD>@localhost:5432/movemates
+      PORT=3000
+      ```
+
+      > **Note**: Replace `<DB_USER>` and `<DB_PASSWORD>` with your actual database credentials.
+
+   2. **Add `.env` to `.gitignore`** to ensure it is not committed to version control:
+
+      ```plaintext
+      .env
+      ```
+
+4. **Set up the PostgreSQL database using Docker**:
+
+   Create a `docker-compose.yml` file to configure and run PostgreSQL as a Docker container:
+
+   ```yaml
+   version: '3.8'
+
+   services:
+     db:
+       image: postgres:latest
+       environment:
+         POSTGRES_USER: ${DB_USER}
+         POSTGRES_PASSWORD: ${DB_PASSWORD}
+         POSTGRES_DB: movemates
+       volumes:
+         - db_data:/var/lib/postgresql/data
+       ports:
+         - "5432:5432"
+       networks:
+         - movemates-net
+
+   volumes:
+     db_data:
+
+   networks:
+     movemates-net:
+       driver: bridge
+   ```
+
+5. **Set environment variables**:
+
+   Run the following commands to set environment variables for Docker if you prefer not to store them in `.env`:
+
+   ```bash
+   export DB_USER=postgres
+   export DB_PASSWORD=your_password
+   ```
+
+6. **Start the PostgreSQL container**:
+
+   Run the following command to start the PostgreSQL database:
+
+   ```bash
+   docker-compose up -d
+   ```
+
+   This will start PostgreSQL on `localhost:5432` with the database `movemates`.
+
+7. **Initialize the Database Table**:
+
+   The API will automatically create the `waitlist` table if it does not exist when the server is started.
+
+### Running the Server
+
+1. Start the server:
+
+   ```bash
+   node index.js
+   ```
+
+   Or, if you have **Nodemon** installed:
+
+   ```bash
+   npx nodemon index.js
+   ```
+
+2. The server will run on `http://localhost:3000` by default.
+
+### API Endpoints
+
+#### Add a User to the Waitlist
+
+- **URL**: `/api/waitlist`
+- **Method**: `POST`
+- **Request Body**:
+
+  ```json
+  {
+    "name": "John",
+    "surname": "Doe",
+    "email": "johndoe@example.com",
+    "userType": "customer",
+    "province": "Gauteng",
+    "city": "Johannesburg"
+  }
+  ```
+
+- **Response**:
+  - **201 Created**: User successfully added to the waitlist.
+  - **409 Conflict**: Email already exists in the waitlist.
+  - **400 Bad Request**: Missing or invalid fields.
+  - **500 Internal Server Error**: Server error.
+
+### Error Handling
+
+- **400 Bad Request**: Missing required fields or invalid `userType`.
+- **409 Conflict**: Email already exists in the waitlist.
+- **500 Internal Server Error**: Server encountered an error with database operations.
+
+### Stopping the Database
+
+To stop the database container, use:
+
+```bash
+docker-compose down
+```
+
+### Security Recommendations
+
+- Avoid storing sensitive credentials in your `docker-compose.yml` file or version-controlled `.env` files.
+- Use environment variables directly on your Docker host or consider a secret management solution like Docker Secrets, AWS Secrets Manager, or HashiCorp Vault for production environments.
+
+### License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and create a pull request.
+
+---
+
+### Contact
+
+For questions or support, contact `your-email@example.com`.
+```
