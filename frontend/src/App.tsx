@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { Car, CheckCircle, ChevronRight } from 'lucide-react';
+import SkeletonPhone from './components/SkeletonPhone';
+import EnhancedWaitlistForm from './components/EnhancedWaitlistForm';
+import Navbar from './components/Navbar';
+import ChatComponent from './components/ChatComponent';
 
 function App() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
-
+  const [showWaitlist, setShowWaitlist] = useState(false);
+  const [showChat, setShowChat] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,59 +37,61 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 text-white">
-      <header className="container mx-auto px-4 py-6 flex justify-between items-center">
-        <div className="flex items-center">
-          <Car className="w-8 h-8 mr-2" />
-          <span className="text-2xl font-bold">MoveMates</span>
-        </div>
-        <nav>
-          <a href="#about" className="mr-4 hover:underline">About</a>
-          <a href="#features" className="mr-4 hover:underline">Features</a>
-          <a href="#join" className="bg-white text-blue-500 px-4 py-2 rounded-full hover:bg-opacity-90 transition duration-300">Join Waitlist</a>
-        </nav>
-      </header>
-
-      <main className="container mx-auto px-4 py-16">
-        <section className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-4">The Future of Urban Transportation</h1>
-          <p className="text-xl mb-8">Experience move mates.</p>
-          <a href="#join" className="bg-white text-blue-500 px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-flex items-center">
-            Get Early Access
-            <ChevronRight className="ml-2" />
-          </a>
-        </section>
-
-        {/* ADD INFO HERE */}
-
-        <section id="join" className="bg-white text-blue-500 rounded-lg p-8 max-w-md mx-auto">
-          <h2 className="text-3xl font-bold mb-4">Join the Waitlist</h2>
-          {submitted ? (
-            <div className="text-center">
-              <CheckCircle className="w-16 h-16 mx-auto mb-4 text-green-500" />
-              <p className="text-xl">Thank you for joining our waitlist!</p>
+    <div className="min-h-screen bg-white text-black">
+      <Navbar onWaitlistClick={() => setShowWaitlist(true)} showChat={showChat} />
+      
+      {!showWaitlist ? (
+        <main className="container mx-auto px-4 py-16">
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[600px]">
+            <div className="text-left">
+              <h1 className="text-5xl font-bold mb-8 text-[#081427] relative">
+                Moving with<br />Complete Control
+                <img 
+                  src="/assets/svg/underline.svg" 
+                  alt="" 
+                  className="absolute -bottom-4 right-15 w-48"
+                />
+              </h1>
+              <p className="text-xl mb-12 text-black">Your last-mile moving solution, designed for seamless <br/> relocations from a single item to an entire office.<br/> Trusted, tech-enabled, and stress-free.</p>
+              {!showChat && (
+                <button
+                  onClick={() => setShowWaitlist(true)}
+                  className="bg-[#081427] text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-[#FF8A47] transition duration-300 inline-flex items-center"
+                >
+                  Get Early Access
+                  <ChevronRight className="ml-2" />
+                </button>
+              )}
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                className="w-full px-4 py-2 rounded border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <button
-                type="submit"
-                className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300"
-              >
-                Join Waitlist
-              </button>
-              {error && <p className="text-red-500">{error}</p>}
-            </form>
-          )}
-        </section>
-      </main>
+            {!showChat && (
+              <div className="flex justify-center -mt-32">
+                <SkeletonPhone />
+              </div>
+            )}
+          </section>
+        </main>
+      ) : (
+        <EnhancedWaitlistForm 
+          onClose={() => setShowWaitlist(false)}
+        />
+      )}
+
+      <div className="fixed bottom-4 right-4 z-0">
+        {showChat ? (
+          <ChatComponent onClose={() => setShowChat(false)} isWaitlistOpen={showWaitlist} />
+        ) : (
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => setShowChat(true)}>
+            <div className="bg-white rounded-full shadow-lg px-4 py-2">
+              <p className="text-gray-700">Chat with<br/> our Assistant</p>
+            </div>
+            <img 
+              src="/assets/images/bot.png" 
+              alt="Chat Assistant" 
+              className="w-12 h-12 rounded-full object-cover border-2 border-[#FE6912] shadow-lg animate-bounce"
+            />
+          </div>
+        )}
+      </div>
 
       <footer className="container mx-auto px-4 py-6 text-center">
         <p>&copy; 2024 MoveMates. All rights reserved.</p>
