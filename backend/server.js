@@ -11,6 +11,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from the React build folder
+app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+// Fallback to index.html for any route not handled by API
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+});
+
 // Routes
 app.use('/api/waitlist', waitlistRouter);
 
