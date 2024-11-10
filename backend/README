@@ -1,3 +1,5 @@
+Here's an updated README that includes instructions for running tests using Vitest, which aligns with your setup and ensures comprehensive documentation:
+
 ```markdown
 # MoveMates Waitlist API
 
@@ -23,6 +25,7 @@ A backend API built with Node.js and Express for managing a waitlist system. Thi
 - dotenv (for environment configuration)
 - CORS
 - Docker (for easy PostgreSQL setup)
+- Vitest (for testing)
 
 ## Getting Started
 
@@ -121,13 +124,13 @@ A backend API built with Node.js and Express for managing a waitlist system. Thi
 1. Start the server:
 
    ```bash
-   node index.js
+   npm start
    ```
 
    Or, if you have **Nodemon** installed:
 
    ```bash
-   npx nodemon index.js
+   npm run dev
    ```
 
 2. The server will run on `http://localhost:3000` by default.
@@ -162,6 +165,24 @@ A backend API built with Node.js and Express for managing a waitlist system. Thi
 - **400 Bad Request**: Missing required fields or invalid `userType`.
 - **409 Conflict**: Email already exists in the waitlist.
 - **500 Internal Server Error**: Server encountered an error with database operations.
+
+### Running Tests
+
+This project uses Vitest for testing. Ensure that test files are named with `.test.js` or `.spec.js` extensions.
+
+1. **Run all tests**:
+
+   ```bash
+   npm run test
+   ```
+
+2. **Run tests with coverage report**:
+
+   ```bash
+   npm run test:coverage
+   ```
+
+3. **View Results**: After running the tests, Vitest will display the results in the terminal, including any errors or passing tests. If you ran with `--coverage`, it will also show the test coverage report.
 
 ### Stopping the Database
 
