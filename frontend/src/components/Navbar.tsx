@@ -1,6 +1,3 @@
-import React from 'react';
-import { Car } from 'lucide-react';
-
 interface NavbarProps {
   onWaitlistClick: () => void;
   showChat: boolean;

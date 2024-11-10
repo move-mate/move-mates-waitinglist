@@ -1,40 +1,13 @@
-import React, { useState } from 'react';
-import { Car, CheckCircle, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronRight } from 'lucide-react';
 import SkeletonPhone from './components/SkeletonPhone';
 import EnhancedWaitlistForm from './components/EnhancedWaitlistForm';
 import Navbar from './components/Navbar';
 import ChatComponent from './components/ChatComponent';
 
 function App() {
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
   const [showWaitlist, setShowWaitlist] = useState(false);
   const [showChat, setShowChat] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    try {
-      const response = await fetch('http://localhost:3000/api/waitlist', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to join waitlist');
-      }
-      
-      setSubmitted(true);
-      setEmail('');
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-    }
-  };
 
   return (
     <div className="min-h-screen bg-white text-black">

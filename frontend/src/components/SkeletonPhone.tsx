@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const SkeletonPhone = () => {
   const [showImage, setShowImage] = useState(false);
@@ -115,18 +115,21 @@ const SkeletonPhone = () => {
                 </div>
               ))}
             </div>
-            
+
             {/* Bottom Buttons */}
-            <div className="absolute bottom-6 left-4 right-4 space-y-2">
-              <div className="h-12 w-full bg-gradient-to-r from-[#2C4159] to-[#FF9B59] rounded-full p-[2px] animate-slide-in"
-                   style={{ animationDelay: '2s' }}>
-                <div className="h-full w-full bg-white rounded-full" />
+            {showButtons && (
+              <div className="absolute bottom-6 left-4 right-4 space-y-2">
+                <div className="h-12 w-full bg-gradient-to-r from-[#2C4159] to-[#FF9B59] rounded-full p-[2px] animate-slide-in"
+                    style={{ animationDelay: '2s' }}>
+                  <div className="h-full w-full bg-white rounded-full" />
+                </div>
+                <div className="h-12 w-full bg-gradient-to-r from-[#2C4159] to-[#FF9B59] rounded-full p-[2px] animate-slide-in"
+                    style={{ animationDelay: '2.2s' }}>
+                  <div className="h-full w-full bg-white rounded-full" />
+                </div>
               </div>
-              <div className="h-12 w-full bg-gradient-to-r from-[#2C4159] to-[#FF9B59] rounded-full p-[2px] animate-slide-in"
-                   style={{ animationDelay: '2.2s' }}>
-                <div className="h-full w-full bg-white rounded-full" />
-              </div>
-            </div>
+            )}
+
           </div>
         </div>
       </div>
