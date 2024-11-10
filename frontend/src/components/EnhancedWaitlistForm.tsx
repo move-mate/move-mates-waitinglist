@@ -49,6 +49,25 @@ const EnhancedWaitlistForm: React.FC<EnhancedWaitlistFormProps> = ({ onClose }) 
     }
   };
 
+  if (submitted) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full p-4 z-50 flex items-center justify-center">
+        <div className="bg-white rounded-xl shadow-xl p-8 max-w-md text-center">
+          <h2 className="text-2xl font-bold mb-4">Thank you for joining the waitlist!</h2>
+          <p className="text-gray-700 mb-4">
+            We have received your information. We’ll be in touch soon with the latest updates.
+          </p>
+          <button
+            onClick={onClose}
+            className="mt-4 bg-[#FE6912] text-white py-2 px-4 rounded-full hover:bg-[#FF8A47] transition duration-300"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full p-4 z-50">
       <div className="relative max-w-7xl mx-auto bg-white rounded-xl shadow-xl flex min-h-[80vh] mt-8">
