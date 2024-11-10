@@ -20,9 +20,8 @@ export const setupDatabase = async () => {
       CREATE TABLE IF NOT EXISTS waitlist (
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
-        surname VARCHAR(255) NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
-        user_type VARCHAR(50) CHECK (user_type IN ('customer', 'driver', 'business')) NOT NULL,
+        type VARCHAR(50) CHECK (type IN ('customer', 'driver', 'business')) NOT NULL,
         province VARCHAR(100) NOT NULL,
         city VARCHAR(100) NOT NULL,
         created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP

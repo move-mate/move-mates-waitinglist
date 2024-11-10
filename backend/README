@@ -3,13 +3,12 @@ Here's an updated README that includes instructions for running tests using Vite
 ```markdown
 # MoveMates Waitlist API
 
-A backend API built with Node.js and Express for managing a waitlist system. This API allows users to sign up for a waitlist with details such as name, surname, email, user type (customer or driver), province, and city. The project uses PostgreSQL as its database, and Docker is used for easy setup of the database environment.
+A backend API built with Node.js and Express for managing a waitlist system. This API allows users to sign up for a waitlist with details such as name and surname, email, user type (customer or driver), province, and city. The project uses PostgreSQL as its database, and Docker is used for easy setup of the database environment.
 
 ## Features
 
 - Add users to the waitlist with:
-  - **Name**
-  - **Surname**
+  - **Name & Surname**
   - **Email** (must be unique)
   - **User Type** (either "customer" or "driver")
   - **Province**
@@ -145,8 +144,7 @@ A backend API built with Node.js and Express for managing a waitlist system. Thi
 
   ```json
   {
-    "name": "John",
-    "surname": "Doe",
+    "name": "John Doe",
     "email": "johndoe@example.com",
     "userType": "customer",
     "province": "Gauteng",

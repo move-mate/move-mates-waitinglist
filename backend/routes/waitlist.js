@@ -6,9 +6,8 @@ export const waitlistRouter = express.Router();
 
 const validateWaitlist = [
   body('name').trim().notEmpty().withMessage('Name is required'),
-  body('surname').trim().notEmpty().withMessage('Surname is required'),
   body('email').isEmail().withMessage('Valid email is required'),
-  body('userType').isIn(['customer', 'driver', 'business']).withMessage('Invalid user type'),
+  body('type').isIn(['customer', 'driver', 'business']).withMessage('Invalid user type'),
   body('province').trim().notEmpty().withMessage('Province is required'),
   body('city').trim().notEmpty().withMessage('City is required'),
 ];

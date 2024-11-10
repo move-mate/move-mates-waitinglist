@@ -1,13 +1,13 @@
 import { getPool } from '../db/setup.js';
 
-export const addToWaitlist = async ({ name, surname, email, userType, province, city }) => {
+export const addToWaitlist = async ({ name, email, type, province, city }) => {
   const pool = getPool();
   
   const result = await pool.query(
-    `INSERT INTO waitlist (name, surname, email, user_type, province, city)
-     VALUES ($1, $2, $3, $4, $5, $6)
+    `INSERT INTO waitlist (name, email, type, province, city)
+     VALUES ($1, $2, $3, $4, $5)
      RETURNING *`,
-    [name, surname, email, userType, province, city]
+    [name, email, type, province, city]
   );
   
   return result.rows[0];

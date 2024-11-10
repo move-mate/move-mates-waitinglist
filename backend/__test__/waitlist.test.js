@@ -19,8 +19,7 @@ describe('Waitlist API', () => {
 
   it('should add a new user to waitlist', async () => {
     const userData = {
-      name: 'John',
-      surname: 'Doe',
+      name: 'John Doe',
       email: 'john@example.com',
       userType: 'customer',
       province: 'Western Cape',
@@ -38,8 +37,7 @@ describe('Waitlist API', () => {
 
   it('should prevent duplicate emails', async () => {
     const userData = {
-      name: 'Jane',
-      surname: 'Doe',
+      name: 'Jane Doe',
       email: 'john@example.com',
       userType: 'customer',
       province: 'Western Cape',
@@ -65,8 +63,7 @@ describe('Waitlist API', () => {
 
   it('should validate user type', async () => {
     const userData = {
-      name: 'John',
-      surname: 'Doe',
+      name: 'John Doe',
       email: 'john2@example.com',
       userType: 'invalid',
       province: 'Western Cape',
