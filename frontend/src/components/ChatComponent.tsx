@@ -8,7 +8,9 @@ interface ChatComponentProps {
 
 const ChatComponent: React.FC<ChatComponentProps> = ({ onClose, isWaitlistOpen }) => {
   return (
-    <div className={`fixed bottom-8 right-4 w-[450px] bg-white rounded-xl shadow-2xl overflow-hidden transition-opacity duration-300 ${isWaitlistOpen ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}>
+    <div className={`bg-white rounded-xl shadow-2xl overflow-hidden transition-opacity duration-300 ${
+      isWaitlistOpen ? 'opacity-30 pointer-events-none' : 'opacity-100'
+    }`}>
       {/* Header */}
       <div className="bg-[#081427] p-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
@@ -28,7 +30,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ onClose, isWaitlistOpen }
       </div>
 
       {/* Chat Messages Area */}
-      <div className="h-[500px] overflow-y-auto p-4 bg-gray-50">
+      <div className="h-[450px] md:h-[500px] overflow-y-auto p-4 bg-gray-50">
         <div className="flex gap-2 mb-4">
           <img 
             src="/assets/images/bot.png" 
@@ -73,15 +75,15 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ onClose, isWaitlistOpen }
         </div>
       </div>
 
-      {/* Input Area */}
-      <div className="p-4 border-t">
+      {/* Chat Input Area */}
+      <div className="p-3 bg-white border-t border-gray-200">
         <div className="flex gap-2">
           <input
             type="text"
             placeholder="Type your message..."
-            className="flex-1 p-2 border rounded-full focus:outline-none focus:border-[#FE6912]"
+            className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#FE6912]"
           />
-          <button className="bg-[#FE6912] text-white px-6 py-2 rounded-full hover:bg-[#FF8A47] transition-colors">
+          <button className="bg-[#FE6912] text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors">
             Send
           </button>
         </div>
