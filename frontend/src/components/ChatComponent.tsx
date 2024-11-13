@@ -38,7 +38,9 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ onClose, isWaitlistOpen }
             className="w-8 h-8 rounded-full border-2 border-[#FE6912]"
           />
           <div className="bg-[#081427] text-white p-3 rounded-lg rounded-tl-none max-w-[80%]">
-            <p className="mb-3">Hello! I'm here to help you. Please select your role:</p>
+            <p className="mb-3">Hello! Our team is actively working to ensure that I work perfectly. As soon as I'm ready, I'll be able to help you.<br/>
+            <br/>
+            Right now you can query directly to our whatsapp.</p>
             
             <div className="flex flex-col gap-3">
               <label className="flex items-center gap-2 cursor-pointer">
@@ -48,10 +50,10 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ onClose, isWaitlistOpen }
                   value="customer"
                   className="w-4 h-4 accent-[#FE6912]"
                 />
-                <span>I'm a mover</span>
+                <span>Whatsapp - <a href="https://wa.me/27834578869" target="_blank" rel="noopener noreferrer">wa.me/27834578869</a></span>
               </label>
               
-              <label className="flex items-center gap-2 cursor-pointer">
+              {/* <label className="flex items-center gap-2 cursor-pointer">
                 <input 
                   type="radio" 
                   name="userRole" 
@@ -69,7 +71,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ onClose, isWaitlistOpen }
                   className="w-4 h-4 accent-[#FE6912]"
                 />
                 <span>I'm a driver</span>
-              </label>
+              </label> */}
             </div>
           </div>
         </div>
